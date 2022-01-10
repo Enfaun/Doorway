@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Doorway</string>
+    <string name="api" translatable="false">http://140.125.206.160:8000</string>
+    <string name="api_login" translatable="false">/login</string>
+    <string name="api_list" translatable="false">/list</string>
+    <string name="api_door" translatable="false">/door</string>
+    <string name="api_door_lazyupdate" translatable="false">/door_lazyupdate</string>
+    <string name="api_checktoken" translatable="false">/checktoken</string>
+    <string name="toast_authenticating">Authenticating...</string>
+    <string name="toast_authed">Login successfully.</string>
+    <string name="toast_auth_fail">Authentication failed.</string>
+</resources>
