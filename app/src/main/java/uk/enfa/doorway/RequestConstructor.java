@@ -66,10 +66,11 @@ public class RequestConstructor {
     }
 
     AuthJsonObjectRequest createGetDoorRequest(
+            long id,
             Response.Listener<JSONObject> listener,
             @Nullable Response.ErrorListener errorListener
     ) {
-        String url = getResources().getString(R.string.api) + getResources().getString(R.string.api_door);
+        String url = getResources().getString(R.string.api) + getResources().getString(R.string.api_door) + "/" + id;
         AuthJsonObjectRequest req = new AuthJsonObjectRequest(Request.Method.GET, url, null, listener, errorListener);
         return req;
     }
@@ -84,11 +85,12 @@ public class RequestConstructor {
     }
 
     AuthJsonObjectRequest createSetDoorRequest(
+            long id,
             JSONObject options,
             Response.Listener<JSONObject> listener,
             @Nullable Response.ErrorListener errorListener
     ) {
-        String url = getResources().getString(R.string.api) + getResources().getString(R.string.api_door);
+        String url = getResources().getString(R.string.api) + getResources().getString(R.string.api_door) + "/" + id;
         AuthJsonObjectRequest req = new AuthJsonObjectRequest(Request.Method.POST, url, options, listener, errorListener);
         return req;
     }

@@ -54,6 +54,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/door_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:divider="@drawable/empty_wide_divider"

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 checkLoginSafe(true);
             }
-        }, 10000, 10000);
+        }, 5000, 5000);
     }
 
     @Override
@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try{
                     if(!response.getBoolean("ok")){
-                        if(!lazyload) Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), response.getString("msg"), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         MainActivity.this.startActivity(intent);
                         return;
                     }
-                    Toast.makeText(getApplicationContext(), R.string.toast_authed, Toast.LENGTH_SHORT).show();
+                    if(!lazyload) Toast.makeText(getApplicationContext(), R.string.toast_authed, Toast.LENGTH_SHORT).show();
                     if(!lazyload || (doors==null)) {
                         loadAllDoors();
                     }else{
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     private void populateDoors(){
         try {
             doorsArr = doors.getJSONArray("doors");
-            doorwayCardRecyclerAdapter = new DoorwayCardRecyclerAdapter(doorsArr);
+            doorwayCardRecyclerAdapter = new DoorwayCardRecyclerAdapter(doorsArr, new AppDoorClickListener());
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
             binding.doors.setLayoutManager(linearLayoutManager);
             binding.doors.setAdapter(doorwayCardRecyclerAdapter);
@@ -157,4 +157,23 @@ public class MainActivity extends AppCompatActivity {
         }catch(Exception e){}
     }
 
+    class AppDoorClickListener implements DoorClickListener {
+        @Override
+        public void onLockedClicked(long id) {
+
+        }
+
+        @Override
+        public void onUnlockedClicked(long id) {
+
+        }
+
+        @Override
+        public void onInfoClicked(long id) {
+            Intent intent = new Intent(MainActivity.this, DoorManageActivity.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
+        }
+    }
 }
+
